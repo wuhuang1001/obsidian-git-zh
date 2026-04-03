@@ -1,4 +1,5 @@
 import { Platform } from "obsidian";
+import { VIEWS } from "./lang/zh-CN";
 import type { ObsidianGitSettings } from "./types";
 export const DATE_FORMAT = "YYYY-MM-DD";
 export const DATE_TIME_FORMAT_MINUTES = `${DATE_FORMAT} HH:mm`;
@@ -71,24 +72,24 @@ export const DEFAULT_SETTINGS: ObsidianGitSettings = {
 
 export const SOURCE_CONTROL_VIEW_CONFIG = {
     type: "git-view",
-    name: "Source Control",
+    name: VIEWS.SOURCE_CONTROL,
     icon: "git-pull-request",
 };
 
 export const HISTORY_VIEW_CONFIG = {
     type: "git-history-view",
-    name: "History",
+    name: VIEWS.HISTORY,
     icon: "history",
 };
 
 export const SPLIT_DIFF_VIEW_CONFIG = {
     type: "split-diff-view",
-    name: "Diff view",
+    name: VIEWS.SPLIT_DIFF_VIEW,
     icon: "diff",
 };
 export const DIFF_VIEW_CONFIG = {
     type: "diff-view",
-    name: "Diff View",
+    name: VIEWS.DIFF_VIEW,
     icon: "git-pull-request",
 };
 

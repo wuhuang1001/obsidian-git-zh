@@ -18,6 +18,7 @@ import { PromiseQueue } from "src/promiseQueue";
 import { ObsidianGitSettingsTab } from "src/setting/settings";
 import { StatusBar } from "src/statusBar";
 import { CustomMessageModal } from "src/ui/modals/customMessageModal";
+import { NOTICES } from "./lang/zh-CN";
 import AutomaticsManager from "./automaticsManager";
 import { addCommmands } from "./commands";
 import {
@@ -566,7 +567,7 @@ export default class ObsidianGit extends Plugin {
                     break;
                 case "missing-repo":
                     new Notice(
-                        "Can't find a valid git repository. Please create one via the given command or clone an existing repo.",
+                        "找不到有效的 Git 仓库。请通过命令创建一个仓库或克隆现有仓库。",
                         10000
                     );
                     break;
@@ -617,7 +618,7 @@ export default class ObsidianGit extends Plugin {
                     }
 
                     if (pausedAutomatics) {
-                        new Notice("Automatic routines are currently paused.");
+                        new Notice(NOTICES.AUTOMATIC_ROUTINES_PAUSED);
                     }
 
                     break;
@@ -637,7 +638,7 @@ export default class ObsidianGit extends Plugin {
     async createNewRepo() {
         try {
             await this.gitManager.init();
-            new Notice("Initialized new repo");
+            new Notice(NOTICES.INITIALIZED_NEW_REPO);
             await this.init({ fromReload: true });
         } catch (e) {
             this.displayError(e);
@@ -678,7 +679,7 @@ export default class ObsidianGit extends Plugin {
                 });
                 const containsConflictDir = await modal.openAndGetResult();
                 if (containsConflictDir === undefined) {
-                    new Notice("Aborted clone");
+                    new Notice(NOTICES.ABORTED_CLONE);
                     return;
                 } else if (containsConflictDir === "YES") {
                     const confirmOption =
@@ -696,7 +697,7 @@ export default class ObsidianGit extends Plugin {
                             true
                         );
                     } else {
-                        new Notice("Aborted clone");
+                        new Notice(NOTICES.ABORTED_CLONE);
                         return;
                     }
                 }
@@ -708,18 +709,18 @@ export default class ObsidianGit extends Plugin {
             }).openAndGetResult();
             let depthInt = undefined;
             if (depth === undefined) {
-                new Notice("Aborted clone");
+                new Notice(NOTICES.ABORTED_CLONE);
                 return;
             }
 
             if (depth !== "") {
                 depthInt = parseInt(depth);
                 if (isNaN(depthInt)) {
-                    new Notice("Invalid depth. Aborting clone.");
+                    new Notice(NOTICES.INVALID_DEPTH);
                     return;
                 }
             }
-            new Notice(`Cloning new repo into "${dir}"`);
+            new Notice(NOTICES.CLONING_REPO(dir));
             const oldBase = this.settings.basePath;
             const customDir = dir && dir !== ".";
             //Set new base path before clone to ensure proper .git/index file location in isomorphic-git
@@ -732,8 +733,8 @@ export default class ObsidianGit extends Plugin {
                     dir,
                     depthInt
                 );
-                new Notice("Cloned new repo.");
-                new Notice("Please restart Obsidian");
+                new Notice(NOTICES.CLONED_REPO);
+                new Notice(NOTICES.PLEASE_RESTART);
 
                 if (customDir) {
                     await this.saveSettings();
@@ -999,7 +1000,7 @@ export default class ObsidianGit extends Plugin {
 
                 // Check if commit message is empty after all processing
                 if (!cmtMessage || cmtMessage.trim() === "") {
-                    new Notice("Commit aborted: No commit message provided");
+                    new Notice(NOTICES.COMMIT_ABORTED_NO_MESSAGE);
                     this.setPluginState({
                         gitAction: CurrentGitAction.idle,
                     });
@@ -1292,7 +1293,7 @@ export default class ObsidianGit extends Plugin {
             return true;
         }
         if (!(await this.gitManager.branchInfo()).tracking) {
-            new Notice("No upstream branch is set. Please select one.");
+            new Notice(NOTICES.NO_UPSTREAM_BRANCH);
             return await this.setUpstreamBranch();
         }
         return true;
@@ -1588,7 +1589,7 @@ I strongly recommend to use "Source mode" for viewing the conflicted files. For 
 
     displayError(data: unknown, timeout: number = 10 * 1000): void {
         if (data instanceof Errors.UserCanceledError) {
-            new Notice("Aborted");
+            new Notice(NOTICES.ABORTED);
             return;
         }
         let error: Error;

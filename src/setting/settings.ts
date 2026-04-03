@@ -15,6 +15,7 @@ import {
 import { IsomorphicGit } from "src/gitManager/isomorphicGit";
 import { SimpleGit } from "src/gitManager/simpleGit";
 import { previewColor } from "src/editor/lineAuthor/lineAuthorProvider";
+import { SETTINGS } from "src/lang/zh-CN";
 import type {
     LineAuthorDateTimeFormatOptions,
     LineAuthorDisplay,
@@ -67,18 +68,18 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
         containerEl.empty();
         if (!gitReady) {
             containerEl.createEl("p", {
-                text: "Git is not ready. When all settings are correct you can configure commit-sync, etc.",
+                text: SETTINGS.GIT_NOT_READY,
             });
             containerEl.createEl("br");
         }
 
         let setting: Setting;
         if (gitReady) {
-            new Setting(containerEl).setName("Automatic").setHeading();
+            new Setting(containerEl).setName(SETTINGS.AUTOMATIC).setHeading();
             new Setting(containerEl)
-                .setName("Split timers for automatic commit and sync")
+                .setName(SETTINGS.SPLIT_TIMERS)
                 .setDesc(
-                    "Enable to use one interval for commit and another for sync."
+                    SETTINGS.SPLIT_TIMERS_DESC
                 )
                 .addToggle((toggle) =>
                     toggle
@@ -95,13 +96,13 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
                 );
 
             new Setting(containerEl)
-                .setName(`Auto ${commitOrSync} interval (minutes)`)
+                .setName(SETTINGS.AUTO_COMMIT_INTERVAL)
                 .setDesc(
-                    `${
+                    SETTINGS.AUTO_COMMIT_INTERVAL_DESC(
                         plugin.settings.differentIntervalCommitAndPush
-                            ? "Commit"
-                            : "Commit and sync"
-                    } changes every X minutes. Set to 0 (default) to disable. (See below setting for further configuration!)`
+                            ? SETTINGS.COMMIT
+                            : SETTINGS.COMMIT_AND_SYNC
+                    )
                 )
                 .addText((text) => {
                     text.inputEl.type = "number";
@@ -125,13 +126,12 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
                 });
 
             setting = new Setting(containerEl)
-                .setName(`Auto ${commitOrSync} after stopping file edits`)
+                .setName(SETTINGS.AUTO_COMMIT_AFTER_EDIT)
                 .setDesc(
-                    `Requires the ${commitOrSync} interval not to be 0.
-                        If turned on, do auto ${commitOrSync} every ${formatMinutes(
-                            plugin.settings.autoSaveInterval
-                        )} after stopping file edits.
-                        This also prevents auto ${commitOrSync} while editing a file. If turned off, it's independent from the last file edit.`
+                    SETTINGS.AUTO_COMMIT_AFTER_EDIT_DESC(
+                        commitOrSync === "commit" ? SETTINGS.COMMIT : SETTINGS.COMMIT_AND_SYNC,
+                        formatMinutes(plugin.settings.autoSaveInterval)
+                    )
                 )
                 .addToggle((toggle) =>
                     toggle
@@ -150,9 +150,11 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
             );
 
             setting = new Setting(containerEl)
-                .setName(`Auto ${commitOrSync} after latest commit`)
+                .setName(SETTINGS.AUTO_COMMIT_AFTER_LATEST)
                 .setDesc(
-                    `If turned on, sets last auto ${commitOrSync} timestamp to the latest commit timestamp. This reduces the frequency of auto ${commitOrSync} when doing manual commits.`
+                    SETTINGS.AUTO_COMMIT_AFTER_LATEST_DESC(
+                        commitOrSync === "commit" ? SETTINGS.COMMIT : SETTINGS.COMMIT_AND_SYNC
+                    )
                 )
                 .addToggle((toggle) =>
                     toggle
@@ -170,9 +172,9 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
             );
 
             setting = new Setting(containerEl)
-                .setName(`Auto push interval (minutes)`)
+                .setName(SETTINGS.AUTO_PUSH_INTERVAL)
                 .setDesc(
-                    "Push commits every X minutes. Set to 0 (default) to disable."
+                    SETTINGS.AUTO_PUSH_INTERVAL_DESC
                 )
                 .addText((text) => {
                     text.inputEl.type = "number";
@@ -200,9 +202,9 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
             );
 
             new Setting(containerEl)
-                .setName("Auto pull interval (minutes)")
+                .setName(SETTINGS.AUTO_PULL_INTERVAL)
                 .setDesc(
-                    "Pull changes every X minutes. Set to 0 (default) to disable."
+                    SETTINGS.AUTO_PULL_INTERVAL_DESC
                 )
                 .addText((text) => {
                     text.inputEl.type = "number";
@@ -226,9 +228,11 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
                 });
 
             new Setting(containerEl)
-                .setName(`Auto ${commitOrSync} only staged files`)
+                .setName(SETTINGS.AUTO_COMMIT_ONLY_STAGED)
                 .setDesc(
-                    `If turned on, only staged files are committed on ${commitOrSync}. If turned off, all changed files are committed.`
+                    SETTINGS.AUTO_COMMIT_ONLY_STAGED_DESC(
+                        commitOrSync === "commit" ? SETTINGS.COMMIT : SETTINGS.COMMIT_AND_SYNC
+                    )
                 )
                 .addToggle((toggle) =>
                     toggle
@@ -241,9 +245,9 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
 
             new Setting(containerEl)
                 .setName(
-                    `Specify custom commit message on auto ${commitOrSync}`
+                    SETTINGS.CUSTOM_MESSAGE_ON_AUTO
                 )
-                .setDesc("You will get a pop up to specify your message.")
+                .setDesc(SETTINGS.CUSTOM_MESSAGE_ON_AUTO_DESC)
                 .addToggle((toggle) =>
                     toggle
                         .setValue(plugin.settings.customMessageOnAutoBackup)
@@ -255,10 +259,9 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
                 );
 
             setting = new Setting(containerEl)
-                .setName(`Commit message on auto ${commitOrSync}`)
+                .setName(SETTINGS.AUTO_COMMIT_MESSAGE)
                 .setDesc(
-                    "Available placeholders: {{date}}" +
-                        " (see below), {{hostname}} (see below), {{numFiles}} (number of changed files in the commit) and {{files}} (changed files in commit message)."
+                    SETTINGS.AUTO_COMMIT_MESSAGE_DESC
                 )
                 .addTextArea((text) => {
                     text.setPlaceholder(
@@ -282,13 +285,12 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
                 plugin.settings.customMessageOnAutoBackup
             );
 
-            new Setting(containerEl).setName("Commit message").setHeading();
+            new Setting(containerEl).setName(SETTINGS.COMMIT_MESSAGE).setHeading();
 
             const manualCommitMessageSetting = new Setting(containerEl)
-                .setName("Commit message on manual commit")
+                .setName(SETTINGS.MANUAL_COMMIT_MESSAGE)
                 .setDesc(
-                    "Available placeholders: {{date}}" +
-                        " (see below), {{hostname}} (see below), {{numFiles}} (number of changed files in the commit) and {{files}} (changed files in commit message). Leave empty to require manual input on each commit."
+                    SETTINGS.MANUAL_COMMIT_MESSAGE_DESC
                 );
             manualCommitMessageSetting.addTextArea((text) => {
                 manualCommitMessageSetting.addButton((button) => {
@@ -310,9 +312,9 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
             });
 
             new Setting(containerEl)
-                .setName("Commit message script")
+                .setName(SETTINGS.COMMIT_MESSAGE_SCRIPT)
                 .setDesc(
-                    "A script that is run using 'sh -c' to generate the commit message. May be used to generate commit messages using AI tools. Available placeholders: {{hostname}}, {{date}}."
+                    SETTINGS.COMMIT_MESSAGE_SCRIPT_DESC
                 )
                 .addText((text) => {
                     text.onChange(async (value) => {
@@ -331,7 +333,7 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
                 });
 
             const datePlaceholderSetting = new Setting(containerEl)
-                .setName("{{date}} placeholder format")
+                .setName(SETTINGS.DATE_FORMAT)
                 .addMomentFormat((text) =>
                     text
                         .setDefaultFormat(plugin.settings.commitDateFormat)
@@ -341,13 +343,12 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
                             await plugin.saveSettings();
                         })
                 );
-            datePlaceholderSetting.descEl.innerHTML = `
-            Specify custom date format. E.g. "${DATE_TIME_FORMAT_SECONDS}. See <a href="https://momentjs.com">Moment.js</a> for more formats.`;
+            datePlaceholderSetting.descEl.innerHTML = SETTINGS.DATE_FORMAT_DESC;
 
             new Setting(containerEl)
-                .setName("{{hostname}} placeholder replacement")
+                .setName(SETTINGS.HOSTNAME_PLACEHOLDER)
                 .setDesc(
-                    "Specify custom hostname for every device. Defaults to the OS hostname if not set on desktop."
+                    SETTINGS.HOSTNAME_PLACEHOLDER_DESC
                 )
                 .addText((text) =>
                     text
@@ -358,9 +359,9 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
                 );
 
             new Setting(containerEl)
-                .setName("Preview commit message")
+                .setName(SETTINGS.PREVIEW_COMMIT_MESSAGE)
                 .addButton((button) =>
-                    button.setButtonText("Preview").onClick(async () => {
+                    button.setButtonText(SETTINGS.PREVIEW).onClick(async () => {
                         const commitMessagePreview =
                             await plugin.gitManager.formatCommitMessage(
                                 plugin.settings.commitMessage
@@ -370,7 +371,7 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
                 );
 
             new Setting(containerEl)
-                .setName("List filenames affected by commit in the commit body")
+                .setName(SETTINGS.LIST_FILENAMES_IN_BODY)
                 .addToggle((toggle) =>
                     toggle
                         .setValue(plugin.settings.listChangedFilesInMessageBody)
@@ -381,19 +382,19 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
                         })
                 );
 
-            new Setting(containerEl).setName("Pull").setHeading();
+            new Setting(containerEl).setName(SETTINGS.PULL).setHeading();
 
             if (plugin.gitManager instanceof SimpleGit)
                 new Setting(containerEl)
-                    .setName("Merge strategy")
+                    .setName(SETTINGS.MERGE_STRATEGY)
                     .setDesc(
-                        "Decide how to integrate commits from your remote branch into your local branch."
+                        SETTINGS.MERGE_STRATEGY_DESC
                     )
                     .addDropdown((dropdown) => {
                         const options: Record<SyncMethod, string> = {
-                            merge: "Merge",
-                            rebase: "Rebase",
-                            reset: "Other sync service (Only updates the HEAD without touching the working directory)",
+                            merge: SETTINGS.MERGE_STRATEGY_MERGE,
+                            rebase: SETTINGS.MERGE_STRATEGY_REBASE,
+                            reset: SETTINGS.MERGE_STRATEGY_RESET,
                         };
                         dropdown.addOptions(options);
                         dropdown.setValue(plugin.settings.syncMethod);
@@ -405,15 +406,15 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
                     });
 
             new Setting(containerEl)
-                .setName("Merge strategy on conflicts")
+                .setName(SETTINGS.MERGE_STRATEGY_ON_CONFLICT)
                 .setDesc(
-                    "Decide how to solve conflicts when pulling remote changes. This can be used to favor your local changes or the remote changes automatically."
+                    SETTINGS.MERGE_STRATEGY_ON_CONFLICT_DESC
                 )
                 .addDropdown((dropdown) => {
                     const options: Record<MergeStrategy, string> = {
-                        none: "None (git default)",
-                        ours: "Our changes",
-                        theirs: "Their changes",
+                        none: SETTINGS.MERGE_STRATEGY_NONE,
+                        ours: SETTINGS.MERGE_STRATEGY_OURS,
+                        theirs: SETTINGS.MERGE_STRATEGY_THEIRS,
                     };
                     dropdown.addOptions(options);
                     dropdown.setValue(plugin.settings.mergeStrategy);
@@ -425,8 +426,8 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
                 });
 
             new Setting(containerEl)
-                .setName("Pull on startup")
-                .setDesc("Automatically pull commits when Obsidian starts.")
+                .setName(SETTINGS.PULL_ON_STARTUP)
+                .setDesc(SETTINGS.PULL_ON_STARTUP_DESC)
                 .addToggle((toggle) =>
                     toggle
                         .setValue(plugin.settings.autoPullOnBoot)
@@ -437,16 +438,16 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
                 );
 
             new Setting(containerEl)
-                .setName("Commit-and-sync")
+                .setName(SETTINGS.COMMIT_AND_SYNC)
                 .setDesc(
-                    "Commit-and-sync with default settings means staging everything -> committing -> pulling -> pushing. Ideally this is a single action that you do regularly to keep your local and remote repository in sync."
+                    SETTINGS.COMMIT_AND_SYNC_DESC
                 )
                 .setHeading();
 
             setting = new Setting(containerEl)
-                .setName("Push on commit-and-sync")
+                .setName(SETTINGS.PUSH_ON_COMMIT_SYNC)
                 .setDesc(
-                    `Most of the time you want to push after committing. Turning this off turns a commit-and-sync action into commit ${plugin.settings.pullBeforePush ? "and pull " : ""}only. It will still be called commit-and-sync.`
+                    SETTINGS.PUSH_ON_COMMIT_SYNC_DESC(plugin.settings.pullBeforePush)
                 )
                 .addToggle((toggle) =>
                     toggle
@@ -459,9 +460,9 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
                 );
 
             new Setting(containerEl)
-                .setName("Pull on commit-and-sync")
+                .setName(SETTINGS.PULL_ON_COMMIT_SYNC)
                 .setDesc(
-                    `On commit-and-sync, pull commits as well. Turning this off turns a commit-and-sync action into commit ${plugin.settings.disablePush ? "" : "and push "}only.`
+                    SETTINGS.PULL_ON_COMMIT_SYNC_DESC(!plugin.settings.disablePush)
                 )
                 .addToggle((toggle) =>
                     toggle
@@ -475,16 +476,16 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
 
             if (plugin.gitManager instanceof SimpleGit) {
                 new Setting(containerEl)
-                    .setName("Hunk management")
+                    .setName(SETTINGS.HUNK_MANAGEMENT)
                     .setDesc(
-                        "Hunks are sections of grouped line changes right in your editor."
+                        SETTINGS.HUNK_MANAGEMENT_DESC
                     )
                     .setHeading();
 
                 new Setting(containerEl)
-                    .setName("Signs")
+                    .setName(SETTINGS.SIGNS)
                     .setDesc(
-                        "This allows you to see your changes right in your editor via colored markers and stage/reset/preview individual hunks."
+                        SETTINGS.SIGNS_DESC
                     )
                     .addToggle((toggle) =>
                         toggle
