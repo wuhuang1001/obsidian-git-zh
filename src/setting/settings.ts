@@ -15,7 +15,7 @@ import {
 import { IsomorphicGit } from "src/gitManager/isomorphicGit";
 import { SimpleGit } from "src/gitManager/simpleGit";
 import { previewColor } from "src/editor/lineAuthor/lineAuthorProvider";
-import { SETTINGS, SETTINGS_MISC } from "src/lang/zh-CN";
+import { SETTINGS, SETTINGS_MISC, GIT_MESSAGES } from "src/lang/zh-CN";
 import type {
     LineAuthorDateTimeFormatOptions,
     LineAuthorDisplay,
@@ -991,7 +991,7 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
                 )
             );
             new Notice(
-                "Debug information copied to clipboard. May contain sensitive information!"
+                GIT_MESSAGES.DEBUG_INFO_COPIED
             );
         };
 
@@ -999,7 +999,7 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
             const info = containerEl.createDiv();
             info.setAttr("align", "center");
             info.setText(
-                "Debugging and logging:\nYou can always see the logs of this and every other plugin by opening the console with"
+                GIT_MESSAGES.DEBUGGING_LOGGING_INFO
             );
             const keys = containerEl.createDiv();
             keys.setAttr("align", "center");

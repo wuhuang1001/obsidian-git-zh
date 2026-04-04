@@ -18,7 +18,7 @@ import { PromiseQueue } from "src/promiseQueue";
 import { ObsidianGitSettingsTab } from "src/setting/settings";
 import { StatusBar } from "src/statusBar";
 import { CustomMessageModal } from "src/ui/modals/customMessageModal";
-import { NOTICES, NOTICES_EXTRA, PLACEHOLDERS, MODALS, SIDEBAR, GIT_MESSAGES, CONTEXT_MENU } from "./lang/zh-CN";
+import { NOTICES, NOTICES_EXTRA, PLACEHOLDERS, MODALS, SIDEBAR, GIT_MESSAGES, CONTEXT_MENU, FILE_MENU } from "./lang/zh-CN";
 import AutomaticsManager from "./automaticsManager";
 import { addCommmands } from "./commands";
 import {
@@ -374,7 +374,7 @@ export default class ObsidianGit extends Plugin {
 
         if (source == "file-explorer-context-menu") {
             menu.addItem((item) => {
-                item.setTitle(`Git: Stage`)
+                item.setTitle(FILE_MENU.GIT_STAGE)
                     .setIcon("plus-circle")
                     .setSection("action")
                     .onClick((_) => {
@@ -396,7 +396,7 @@ export default class ObsidianGit extends Plugin {
                     });
             });
             menu.addItem((item) => {
-                item.setTitle(`Git: Unstage`)
+                item.setTitle(FILE_MENU.GIT_UNSTAGE)
                     .setIcon("minus-circle")
                     .setSection("action")
                     .onClick((_) => {
@@ -419,7 +419,7 @@ export default class ObsidianGit extends Plugin {
                     });
             });
             menu.addItem((item) => {
-                item.setTitle(`Git: Add to .gitignore`)
+                item.setTitle(FILE_MENU.GIT_ADD_TO_GITIGNORE)
                     .setIcon("file-x")
                     .setSection("action")
                     .onClick((_) => {
@@ -433,7 +433,7 @@ export default class ObsidianGit extends Plugin {
 
         if (source == "git-source-control") {
             menu.addItem((item) => {
-                item.setTitle(`Git: Add to .gitignore`)
+                item.setTitle(FILE_MENU.GIT_ADD_TO_GITIGNORE)
                     .setIcon("file-x")
                     .setSection("action")
                     .onClick((_) => {
@@ -942,7 +942,7 @@ export default class ObsidianGit extends Plugin {
                 ) {
                     if (!this.settings.disablePopups && fromAuto) {
                         new Notice(
-                            "Auto backup: Please enter a custom commit message. Leave empty to abort"
+                            GIT_MESSAGES.AUTO_BACKUP_CUSTOM_MESSAGE
                         );
                     }
                     const modalMessage = await new CustomMessageModal(

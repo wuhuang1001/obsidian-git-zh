@@ -516,6 +516,9 @@ export const GIT_MESSAGES = {
     TOO_MANY_FILES: "文件太多，无法列出",
     NO_NETWORK: "无网络连接可用",
     VAULT_ROOT: "Vault 根目录",
+    AUTO_BACKUP_CUSTOM_MESSAGE: "自动备份：请输入自定义提交消息。留空则取消",
+    DEBUG_INFO_COPIED: "调试信息已复制到剪贴板。可能包含敏感信息！",
+    DEBUGGING_LOGGING_INFO: "调试和日志：\n您可以通过打开控制台随时查看此插件和其他每个插件的日志",
 } as const;
 
 // 设置相关
@@ -543,4 +546,20 @@ export const FILE_ACTIONS = {
 export const HISTORY_VIEW = {
     CHANGE_LAYOUT: "切换布局",
     REFRESH: "刷新",
+} as const;
+
+// 文件菜单
+export const FILE_MENU = {
+    GIT_STAGE: "Git: 暂存",
+    GIT_UNSTAGE: "Git: 取消暂存",
+    GIT_ADD_TO_GITIGNORE: "Git: 添加到 .gitignore",
+} as const;
+
+// GitHub 相关错误
+export const GITHUB_ERRORS = {
+    FAILED_GET_REMOTE_URL_SUBMODULE: "无法获取子模块的远程 URL",
+    REMOTE_BRANCH_NOT_CONFIGURED: "远程分支未配置",
+    FAILED_GET_CURRENT_BRANCH: "无法获取当前分支名称",
+    FAILED_GET_REMOTE_URL: "无法获取远程 URL",
+    COULD_NOT_PARSE_REMOTE_URL: "无法解析远程 URL",
 } as const;

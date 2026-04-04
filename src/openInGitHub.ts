@@ -2,7 +2,7 @@ import type { Editor, TFile } from "obsidian";
 import { Notice } from "obsidian";
 import type { GitManager } from "./gitManager/gitManager";
 import { SimpleGit } from "./gitManager/simpleGit";
-import { NOTICES_EXTRA } from "./lang/zh-CN";
+import { NOTICES_EXTRA, GITHUB_ERRORS } from "./lang/zh-CN";
 
 export async function openLineInGitHub(
     editor: Editor,
@@ -106,7 +106,7 @@ async function getData(
                 } else {
                     return {
                         result: "failure",
-                        reason: "Failed to get remote url of submodule",
+                        reason: GITHUB_ERRORS.FAILED_GET_REMOTE_URL_SUBMODULE,
                     };
                 }
             }
@@ -116,14 +116,14 @@ async function getData(
     if (remoteBranch == null) {
         return {
             result: "failure",
-            reason: "Remote branch is not configured",
+            reason: GITHUB_ERRORS.REMOTE_BRANCH_NOT_CONFIGURED,
         };
     }
 
     if (branch == null) {
         return {
             result: "failure",
-            reason: "Failed to get current branch name",
+            reason: GITHUB_ERRORS.FAILED_GET_CURRENT_BRANCH,
         };
     }
 
@@ -133,7 +133,7 @@ async function getData(
         if (remoteUrl == null) {
             return {
                 result: "failure",
-                reason: "Failed to get remote url",
+                reason: GITHUB_ERRORS.FAILED_GET_REMOTE_URL,
             };
         }
     }
@@ -143,7 +143,7 @@ async function getData(
     if (res == null) {
         return {
             result: "failure",
-            reason: "Could not parse remote url",
+            reason: GITHUB_ERRORS.COULD_NOT_PARSE_REMOTE_URL,
         };
     } else {
         const [isGitHub, httpsUser, httpsRepo, sshUser, sshRepo] = res;
