@@ -279,6 +279,123 @@ export const SETTINGS = {
     // 差异样式
     COMMIT: "提交",
     SYNC: "同步",
+
+    // 状态栏设置
+    STATUS_BAR_LINE_CHANGES: "状态栏中的行更改摘要",
+    STATUS_BAR_LINE_CHANGES_DESC: "在状态栏中显示行更改摘要。",
+
+    // 历史视图设置
+    SHOW_AUTHOR: "显示作者",
+    SHOW_AUTHOR_DESC: "在历史视图中显示提交的作者。",
+    SHOW_DATE: "显示日期",
+    SHOW_DATE_DESC: "在历史视图中显示提交日期。使用 {{date}} 占位符格式显示日期。",
+
+    // 源代码管理视图设置
+    AUTO_REFRESH_SOURCE_CONTROL: "文件更改时自动刷新源代码管理视图",
+    AUTO_REFRESH_SOURCE_CONTROL_DESC: "在较慢的机器上这可能会导致延迟。如果是这样，请禁用此选项。",
+    SOURCE_CONTROL_REFRESH_INTERVAL: "源代码管理视图刷新间隔",
+    SOURCE_CONTROL_REFRESH_INTERVAL_DESC: "文件更改后刷新源代码管理视图之前等待的毫秒数。",
+
+    // 杂项设置
+    MISCELLANEOUS: "杂项",
+    DIFF_VIEW_STYLE: "差异视图样式",
+    DIFF_VIEW_STYLE_DESC: "设置差异视图的样式。请注意，\"分屏\"模式下的实际差异不是由 Git 生成的，而是由编辑器本身生成的，因此可能与 Git 生成的差异不同。这样做的一个优点是您可以在该视图中编辑文本。",
+    DIFF_STYLE_UNIFIED: "统一",
+
+    // 通知设置
+    DISABLE_INFORMATIVE_NOTIFICATIONS: "禁用信息通知",
+    DISABLE_INFORMATIVE_NOTIFICATIONS_DESC: "禁用 Git 操作的信息通知以减少干扰（请参阅状态栏获取更新）。",
+    DISABLE_ERROR_NOTIFICATIONS: "禁用错误通知",
+    DISABLE_ERROR_NOTIFICATIONS_DESC: "禁用任何类型的错误通知以减少干扰（请参阅状态栏获取更新）。",
+    HIDE_NOTIFICATIONS_NO_CHANGES: "无更改时隐藏通知",
+    HIDE_NOTIFICATIONS_NO_CHANGES_DESC: "当没有要提交或推送的更改时不显示通知。",
+
+    // 状态栏设置
+    SHOW_STATUS_BAR: "显示状态栏",
+    SHOW_STATUS_BAR_DESC: "必须重启 Obsidian 才能使更改生效。",
+    FILE_MENU_INTEGRATION: "文件菜单集成",
+    FILE_MENU_INTEGRATION_DESC: "将 \"暂存\"、\"取消暂存\" 和 \"添加到 .gitignore\" 操作添加到文件菜单。",
+    SHOW_BRANCH_STATUS_BAR: "显示分支状态栏",
+    SHOW_BRANCH_STATUS_BAR_DESC: "必须重启 Obsidian 才能使更改生效。",
+    SHOW_MODIFIED_FILES_COUNT: "在状态栏中显示已修改文件的数量",
+
+    // 认证/提交作者设置
+    AUTHENTICATION_COMMIT_AUTHOR: "认证/提交作者",
+    COMMIT_AUTHOR: "提交作者",
+    GIT_SERVER_USERNAME: "Git 服务器上的用户名",
+    GIT_SERVER_USERNAME_DESC: "例如您在 GitHub 上的用户名",
+    PASSWORD_ACCESS_TOKEN: "密码/个人访问令牌",
+    PASSWORD_ACCESS_TOKEN_DESC: "输入您的密码。您将无法再次看到它。",
+    AUTHOR_NAME_FOR_COMMIT: "提交作者名称",
+    AUTHOR_EMAIL_FOR_COMMIT: "提交作者邮箱",
+
+    // 高级设置
+    ADVANCED_SETTINGS: "高级",
+    ADVANCED_SETTINGS_DESC: "这些设置通常不需要更改，但可能需要用于特殊设置。",
+    UPDATE_SUBMODULES_DESC_FULL: "\"提交并同步\" 和 \"拉取\" 会处理子模块。缺少的功能：冲突文件、拉取/推送/提交文件的数量。需要为每个子模块设置跟踪分支。",
+    SUBMODULE_RECURSE_CHECKOUT_FULL: "递归检出/切换子模块",
+    SUBMODULE_RECURSE_CHECKOUT_DESC_FULL: "每当根仓库发生检出时，递归地对子模块进行检出（如果分支存在）。",
+    CUSTOM_GIT_BINARY_PATH: "自定义 Git 二进制路径",
+    CUSTOM_GIT_BINARY_PATH_DESC: "指定 Git 二进制文件/可执行文件的路径。Git 应该已经在您的 PATH 中。仅对于自定义 Git 安装才需要。",
+    ADDITIONAL_ENV_VARS: "附加环境变量",
+    ADDITIONAL_ENV_VARS_DESC: "每行使用一个环境变量，格式为 KEY=VALUE。",
+    ADDITIONAL_PATH_PATHS: "附加 PATH 环境变量路径",
+    ADDITIONAL_PATH_PATHS_DESC: "每行使用一个路径",
+    RELOAD_ENV_VARS: "使用新环境变量重新加载",
+    RELOAD_ENV_VARS_DESC: "删除之前添加的环境变量需要重启 Obsidian 才能生效。",
+    RELOAD_BUTTON: "重新加载",
+
+    // 自定义路径设置
+    CUSTOM_BASE_PATH: "自定义基础路径（Git 仓库路径）",
+    CUSTOM_BASE_PATH_DESC: "设置 Git 二进制文件应从中执行的 vault 相对路径。主要用于设置 Git 仓库的路径，仅当 Git 仓库位于 vault 根目录下时才需要。在 Windows 上使用 \"\\\" 代替 \"/\"。",
+    CUSTOM_GIT_DIR_PATH: "自定义 Git 目录路径（代替 '.git'）",
+    CUSTOM_GIT_DIR_PATH_DESC: "对应于 GIT_DIR 环境变量。需要重启 Obsidian 才能生效。在 Windows 上使用 \"\\\" 代替 \"/\"。",
+
+    // 禁用设备设置
+    DISABLE_ON_DEVICE: "在此设备上禁用",
+    DISABLE_ON_DEVICE_DESC: "在此设备上禁用插件。此设置不会同步。",
+
+    // 支持设置
+    SUPPORT: "支持",
+    DONATE: "捐赠",
+    DONATE_DESC: "如果您喜欢此插件，请考虑捐赠以支持持续开发。",
+
+    // 行作者详细设置
+    LINE_AUTHOR_SHOW_INFO: "在每行旁边显示提交作者信息",
+    LINE_AUTHOR_FEATURE_GUIDE: "功能指南和快速示例",
+    LINE_AUTHOR_DESKTOP_ONLY: "目前仅在桌面版可用。",
+    LINE_AUTHOR_FEATURE_DESC_FULL: "提交哈希、作者名称和创作日期都可以单独切换。</br>隐藏所有内容，仅显示按年龄着色的侧边栏。",
+    FOLLOW_MOVEMENT_COPIES: "跨文件和提交跟踪移动和复制",
+    FOLLOW_MOVEMENT_DESC: "默认情况下（停用），每行仅显示其更改的最新提交。<br/>使用<i>同一提交</i>，将在同一提交中跟踪文本的剪切-复制-粘贴，并显示原始创作的提交。<br/>使用<i>所有提交</i>，将检测多个提交之间的剪切-复制-粘贴文本。<br/>它使用 <a href=\"https://git-scm.com/docs/git-blame\">git-blame</a>，对于同一（或所有）提交中的匹配项（至少 ${GIT_LINE_AUTHORING_MOVEMENT_DETECTION_MINIMAL_LENGTH} 个字符），将显示<em>原始</em>提交的信息。",
+    FOLLOW_MOVEMENT_INACTIVE: "不跟踪（默认）",
+    FOLLOW_MOVEMENT_SAME_COMMIT: "在同一提交内跟踪",
+    FOLLOW_MOVEMENT_ALL_COMMITS: "在所有提交内跟踪（可能较慢）",
+    SHOW_COMMIT_HASH: "显示提交哈希",
+    AUTHOR_NAME_DISPLAY: "作者名称显示",
+    AUTHOR_NAME_DISPLAY_DESC: "是否以及如何显示作者",
+    AUTHOR_DISPLAY_HIDE: "隐藏",
+    AUTHOR_DISPLAY_INITIALS: "首字母（默认）",
+    AUTHOR_DISPLAY_FIRST_NAME: "名字",
+    AUTHOR_DISPLAY_LAST_NAME: "姓氏",
+    AUTHOR_DISPLAY_FULL: "完整名称",
+    AUTHORING_DATE_DISPLAY: "创作日期显示",
+    AUTHORING_DATE_DISPLAY_DESC: "是否以及如何显示行的创作日期和时间",
+    DATE_DISPLAY_HIDE: "隐藏",
+    DATE_DISPLAY_DATE: "日期（默认）",
+    DATE_DISPLAY_DATETIME: "日期和时间",
+    DATE_DISPLAY_NATURAL: "自然语言",
+    DATE_DISPLAY_CUSTOM: "自定义",
+    CUSTOM_AUTHORING_DATE_FORMAT: "自定义创作日期格式",
+    AUTHORING_DATE_DISPLAY_TIMEZONE: "创作日期显示时区",
+    TIMEZONE_VIEWER_LOCAL: "我的本地时间（默认）",
+    TIMEZONE_AUTHOR_LOCAL: "作者本地时间",
+    TIMEZONE_UTC0000: "UTC+0000/Z",
+    TIMEZONE_DESC: "显示创作日期的时区。可以是您的本地时区（默认）、提交创建期间作者的时区或 <a href=\"https://en.wikipedia.org/wiki/UTC%C2%B100:00\">UTC±00:00</a>。",
+    OLDEST_AGE_COLORING: "着色中的最旧年龄",
+    TEXT_COLOR: "文本颜色",
+    TEXT_COLOR_DESC: "侧边栏文本的 CSS 颜色。<br/>强烈建议使用主题定义的 <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties\">CSS 变量</a>（例如 <pre style=\"display:inline\">var(--text-muted)</pre> 或 <pre style=\"display:inline\">var(--text-on-accent)</pre>），因为它们会自动适应主题更改。<br/>参见：<a href=\"https://github.com/obsidian-community/obsidian-theme-template/blob/main/obsidian.css\">Obsidian 中可用的 CSS 变量列表</a>",
+    IGNORE_WHITESPACE: "忽略更改中的空白和换行符",
+    IGNORE_WHITESPACE_DESC: "默认情况下，空白和换行符被视为文档和更改的一部分（因此不会被忽略）。这使得添加新后续行时，最后一行显示为\"已更改\"，即使之前最后一行的文本相同。<br>如果您不关心纯空白更改（例如列表嵌套/引用缩进更改），则激活此选项将提供更有意义的更改检测。",
 } as const;
 
 // 通用文本
