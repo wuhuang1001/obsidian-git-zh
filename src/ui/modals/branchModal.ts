@@ -1,5 +1,6 @@
 import { FuzzySuggestModal } from "obsidian";
 import type ObsidianGit from "src/main";
+import { PLACEHOLDERS } from "src/lang/zh-CN";
 
 export class BranchModal extends FuzzySuggestModal<string> {
     resolve: (
@@ -11,7 +12,7 @@ export class BranchModal extends FuzzySuggestModal<string> {
         private readonly branches: string[]
     ) {
         super(plugin.app);
-        this.setPlaceholder("Select branch to checkout");
+        this.setPlaceholder(PLACEHOLDERS.SELECT_BRANCH_TO_CHECKOUT);
     }
 
     getItems(): string[] {

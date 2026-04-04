@@ -1,6 +1,7 @@
 import { FuzzySuggestModal } from "obsidian";
 import type ObsidianGit from "src/main";
 import type { FileStatusResult } from "src/types";
+import { PLACEHOLDERS } from "src/lang/zh-CN";
 
 export class ChangedFilesModal extends FuzzySuggestModal<FileStatusResult> {
     plugin: ObsidianGit;
@@ -10,9 +11,7 @@ export class ChangedFilesModal extends FuzzySuggestModal<FileStatusResult> {
         super(plugin.app);
         this.plugin = plugin;
         this.changedFiles = changedFiles;
-        this.setPlaceholder(
-            "Not supported files will be opened by default app!"
-        );
+        this.setPlaceholder(PLACEHOLDERS.NOT_SUPPORTED_FILES_DEFAULT_APP);
     }
 
     getItems(): FileStatusResult[] {

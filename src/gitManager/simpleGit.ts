@@ -28,6 +28,7 @@ import type {
 import { CurrentGitAction, NoNetworkError } from "../types";
 import { impossibleBranch, spawnAsync, splitRemoteBranch } from "../utils";
 import { GitManager } from "./gitManager";
+import { NOTICES_EXTRA, PLACEHOLDERS } from "../lang/zh-CN";
 
 export class SimpleGit extends GitManager {
     git: simple.SimpleGit;
@@ -55,7 +56,7 @@ export class SimpleGit extends GitManager {
                         this.plugin.settings.basePath
                     );
                 } else if (!ignoreError) {
-                    new Notice("ObsidianGit: Base path does not exist");
+                    new Notice(NOTICES_EXTRA.BASE_PATH_NOT_EXIST);
                 }
             }
             this.absoluteRepoPath = basePath;
@@ -237,7 +238,7 @@ export class SimpleGit extends GitManager {
                     obscure: true,
                     placeholder:
                         data.length > 60
-                            ? "Enter a response to the message."
+                            ? PLACEHOLDERS.ENTER_RESPONSE
                             : data,
                 }).openAndGetResult();
                 notice?.hide();

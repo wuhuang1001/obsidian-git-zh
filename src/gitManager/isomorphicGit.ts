@@ -26,6 +26,7 @@ import { splitRemoteBranch, worthWalking } from "../utils";
 import { GitManager } from "./gitManager";
 import { MyAdapter } from "./myAdapter";
 import diff3Merge from "diff3";
+import { NOTICES_EXTRA, PLACEHOLDERS } from "../lang/zh-CN";
 
 export class IsomorphicGit extends GitManager {
     private readonly FILE = 0;
@@ -79,16 +80,13 @@ export class IsomorphicGit extends GitManager {
                 };
             },
             onAuthFailure: async () => {
-                new Notice(
-                    "Authentication failed. Please try with different credentials"
-                );
+                new Notice(NOTICES_EXTRA.AUTH_FAILED);
                 const username = await new GeneralModal(this.plugin, {
-                    placeholder: "Specify your username",
+                    placeholder: PLACEHOLDERS.SPECIFY_USERNAME,
                 }).openAndGetResult();
                 if (username) {
                     const password = await new GeneralModal(this.plugin, {
-                        placeholder:
-                            "Specify your password/personal access token",
+                        placeholder: PLACEHOLDERS.SPECIFY_PASSWORD_TOKEN,
                         obscure: true,
                     }).openAndGetResult();
                     if (password) {

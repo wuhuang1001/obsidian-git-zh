@@ -414,3 +414,69 @@ export const COMMON = {
     DELETED: "已删除",
     RENAMED: "已重命名",
 } as const;
+
+// 源代码管理视图
+export const SOURCE_CONTROL = {
+    COMMIT_AND_SYNC: "提交并同步",
+    COMMIT: "提交",
+    STAGE_ALL: "暂存全部",
+    UNSTAGE_ALL: "取消暂存全部",
+    PUSH: "推送",
+    PULL: "拉取",
+    CHANGE_LAYOUT: "切换布局",
+    REFRESH: "刷新",
+    COMMIT_MESSAGE: "提交消息",
+    CLEAR: "清除",
+    STAGED_CHANGES: "已暂存的更改",
+    UNSTAGE: "取消暂存",
+    CHANGES: "更改",
+    DISCARD: "放弃",
+    STAGE: "暂存",
+    RECENTLY_PULLED_FILES: "最近拉取的文件",
+} as const;
+
+// 模态框占位符
+export const PLACEHOLDERS = {
+    ENTER_REMOTE_URL: "输入远程仓库 URL",
+    ENTER_DIRECTORY_FOR_CLONE: "输入克隆目录。目录必须为空或不存在。",
+    REMOTE_CONTAINS_CONFIGDIR: (configDir: string) => `您的远程仓库根目录是否包含 ${configDir} 目录？`,
+    LOCAL_CONFIGDIR_NEEDS_DELETE: (configDir: string) => `为避免冲突，需要删除本地的 ${configDir} 目录。`,
+    DELETE_ALL_LOCAL_CONFIG: "删除所有本地配置和插件",
+    ABORT_CLONE: "取消克隆",
+    SPECIFY_DEPTH: "指定克隆深度。留空则为完整克隆。",
+    CREATE_NEW_BRANCH: "创建新分支",
+    DELETE_BRANCH: "删除分支",
+    BRANCH_NOT_MERGED_FORCE_DELETE: "此分支未合并到 HEAD。强制删除？",
+    SELECT_OR_CREATE_REMOTE: "选择或输入名称创建新的远程仓库",
+    SELECT_REMOTE: "选择远程仓库",
+    SELECT_BRANCH_TO_CHECKOUT: "选择要检出的分支",
+    EDIT_GITIGNORE: "编辑 .gitignore",
+    SAVE: "保存",
+    TYPE_MESSAGE_WITH_DATE: "输入您的消息，可选择带有日期的版本。",
+    NOT_SUPPORTED_FILES_DEFAULT_APP: "不支持的文件将使用默认应用打开！",
+    SPECIFY_USERNAME: "输入您的用户名",
+    SPECIFY_PASSWORD_TOKEN: "输入您的密码/个人访问令牌",
+    PUSH_ORIGIN_MASTER: "push origin master",
+    ENTER_RESPONSE: "输入对消息的响应。",
+    RUNNING_COMMAND: (command: string) => `正在运行 '${command}'...`,
+} as const;
+
+// 通知消息补充
+export const NOTICES_EXTRA = {
+    NOT_USING_GITHUB: "您似乎没有使用 GitHub",
+    BASE_PATH_NOT_EXIST: "ObsidianGit: 基础路径不存在",
+    AUTH_FAILED: "认证失败，请尝试不同的凭据",
+    ABORTED_NO_UPSTREAM: "已取消。未设置上游分支！",
+    SWITCHED_TO_BRANCH: (branch: string) => `已切换到 ${branch}`,
+    CREATED_BRANCH: (branch: string) => `已创建新分支 ${branch}`,
+    DELETED_BRANCH: (branch: string) => `已删除分支 ${branch}`,
+    FETCHING_REMOTE_BRANCHES: "正在获取远程分支",
+    SET_UPSTREAM_TO: (branch: string) => `已设置上游分支为 ${branch}`,
+} as const;
+
+// 代码块操作
+export const HUNK_ACTIONS = {
+    CLOSE_HUNK: "关闭代码块",
+    STAGE_HUNK: "暂存代码块",
+    RESET_HUNK: "重置代码块",
+} as const;
