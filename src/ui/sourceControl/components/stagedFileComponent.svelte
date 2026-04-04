@@ -11,6 +11,7 @@
         mayTriggerFileMenu,
     } from "src/utils";
     import type GitView from "../sourceControl";
+    import { FILE_ACTIONS } from "src/lang/zh-CN";
 
     interface Props {
         change: FileStatusResult;
@@ -113,7 +114,7 @@
                 {#if fileOpenableInObsidian(change.vaultPath, view.app)}
                     <div
                         data-icon="go-to-file"
-                        aria-label="Open File"
+                        aria-label={FILE_ACTIONS.OPEN_FILE}
                         bind:this={buttons[0]}
                         onclick={open}
                         class="clickable-icon"
@@ -121,7 +122,7 @@
                 {/if}
                 <div
                     data-icon="minus"
-                    aria-label="Unstage"
+                    aria-label={FILE_ACTIONS.UNSTAGE}
                     bind:this={buttons[1]}
                     onclick={unstage}
                     class="clickable-icon"

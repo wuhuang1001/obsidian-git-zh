@@ -13,6 +13,7 @@
     import { arrayProxyWithNewLength, mayTriggerFileMenu } from "src/utils";
     import TooManyFilesComponent from "./tooManyFilesComponent.svelte";
     import { onMount } from "svelte";
+    import { FILE_ACTIONS } from "src/lang/zh-CN";
     interface Props {
         hierarchy: StatusRootTreeItem;
         plugin: ObsidianGit;
@@ -141,7 +142,7 @@
                             {#if fileType == FileType.staged}
                                 <div
                                     data-icon="minus"
-                                    aria-label="Unstage"
+                                    aria-label={FILE_ACTIONS.UNSTAGE}
                                     onclick={(event) =>
                                         unstage(event, entity.path)}
                                     class="clickable-icon"
@@ -167,7 +168,7 @@
                             {:else}
                                 <div
                                     data-icon="undo"
-                                    aria-label="Discard"
+                                    aria-label={FILE_ACTIONS.DISCARD}
                                     onclick={(event) => discard(event, entity)}
                                     class="clickable-icon"
                                 >
@@ -189,7 +190,7 @@
                                 </div>
                                 <div
                                     data-icon="plus"
-                                    aria-label="Stage"
+                                    aria-label={FILE_ACTIONS.STAGE}
                                     onclick={(event) =>
                                         stage(event, entity.path)}
                                     class="clickable-icon"

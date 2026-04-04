@@ -9,6 +9,7 @@
         mayTriggerFileMenu,
     } from "src/utils";
     import type HistoryView from "../historyView";
+    import { FILE_ACTIONS } from "src/lang/zh-CN";
 
     interface Props {
         diff: DiffFile;
@@ -91,7 +92,7 @@
                 {#if fileOpenableInObsidian(diff.vaultPath, view.app)}
                     <div
                         data-icon="go-to-file"
-                        aria-label="Open File"
+                        aria-label={FILE_ACTIONS.OPEN_FILE}
                         bind:this={buttons[0]}
                         onauxclick={open}
                         onclick={open}

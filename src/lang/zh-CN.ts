@@ -529,3 +529,18 @@ export const DIFF_VIEW = {
     UNSTAGE_HUNK: "取消暂存代码块",
     RESET_HUNK: "重置代码块",
 } as const;
+
+// 文件组件操作
+export const FILE_ACTIONS = {
+    OPEN_FILE: "打开文件",
+    DISCARD: "放弃",
+    STAGE: "暂存",
+    UNSTAGE: "取消暂存",
+    AND_MORE_FILES: (count: number) => `还有 ${count} 个文件`,
+} as const;
+
+// 历史视图
+export const HISTORY_VIEW = {
+    CHANGE_LAYOUT: "切换布局",
+    REFRESH: "刷新",
+} as const;
