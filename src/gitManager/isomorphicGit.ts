@@ -26,7 +26,7 @@ import { splitRemoteBranch, worthWalking } from "../utils";
 import { GitManager } from "./gitManager";
 import { MyAdapter } from "./myAdapter";
 import diff3Merge from "diff3";
-import { NOTICES_EXTRA, PLACEHOLDERS } from "../lang/zh-CN";
+import { NOTICES_EXTRA, PLACEHOLDERS, GIT_MESSAGES } from "../lang/zh-CN";
 
 export class IsomorphicGit extends GitManager {
     private readonly FILE = 0;
@@ -460,7 +460,7 @@ export class IsomorphicGit extends GitManager {
     }
 
     async pull(): Promise<FileStatusResult[]> {
-        const progressNotice = this.showNotice("Initializing pull");
+        const progressNotice = this.showNotice(GIT_MESSAGES.INITIALIZING_PULL);
         try {
             this.plugin.setPluginState({ gitAction: CurrentGitAction.pull });
 
@@ -532,7 +532,7 @@ export class IsomorphicGit extends GitManager {
                 upstreamCommit
             );
 
-            this.showNotice("Finished pull", false);
+            this.showNotice(GIT_MESSAGES.FINISHED_PULL, false);
 
             return changedFiles.map<FileStatusResult>((file) => ({
                 path: file.path,
@@ -559,7 +559,7 @@ export class IsomorphicGit extends GitManager {
         if (!(await this.canPush())) {
             return 0;
         }
-        const progressNotice = this.showNotice("Initializing push");
+        const progressNotice = this.showNotice(GIT_MESSAGES.INITIALIZING_PUSH);
         try {
             this.plugin.setPluginState({ gitAction: CurrentGitAction.status });
             const status = await this.branchInfo();
@@ -721,7 +721,7 @@ export class IsomorphicGit extends GitManager {
     }
 
     async clone(url: string, dir: string, depth?: number): Promise<void> {
-        const progressNotice = this.showNotice("Initializing clone");
+        const progressNotice = this.showNotice(GIT_MESSAGES.INITIALIZING_CLONE);
         try {
             await this.wrapFS(
                 git.clone({
@@ -778,7 +778,7 @@ export class IsomorphicGit extends GitManager {
     }
 
     async fetch(remote?: string): Promise<void> {
-        const progressNotice = this.showNotice("Initializing fetch");
+        const progressNotice = this.showNotice(GIT_MESSAGES.INITIALIZING_FETCH);
 
         try {
             const args = {

@@ -479,4 +479,53 @@ export const HUNK_ACTIONS = {
     CLOSE_HUNK: "关闭代码块",
     STAGE_HUNK: "暂存代码块",
     RESET_HUNK: "重置代码块",
+    UNSTAGE_HUNK: "取消暂存代码块",
+} as const;
+
+// 侧边栏和菜单
+export const SIDEBAR = {
+    OPEN_GIT_SOURCE_CONTROL: "打开 Git 源代码管理",
+    GIT_VIEW: "Git 视图",
+} as const;
+
+// 状态栏
+export const STATUS_BAR = {
+    GIT_OFFLINE: "Git 离线",
+    GIT_READY: "Git 就绪",
+    GIT_DIFF_CURRENT_EDITOR: "当前编辑器的 Git 差异",
+} as const;
+
+// 右键菜单
+export const CONTEXT_MENU = {
+    OPEN_IN_DEFAULT_APP: "在默认应用中打开",
+    SHOW_IN_SYSTEM_EXPLORER: "在系统资源管理器中显示",
+    COPY_COMMIT_HASH: "复制提交哈希",
+    SHOW_COMMIT_HASH: "显示提交哈希",
+} as const;
+
+// Git 操作消息
+export const GIT_MESSAGES = {
+    NO_COMMITS_TO_PUSH: "没有要推送的提交",
+    NO_CHANGES_TO_COMMIT: "没有要提交的更改",
+    CONFLICT_RECOMMENDATION: '强烈建议使用"源代码模式"查看冲突文件。对于简单冲突，在上面列出的每个文件中，用所需文本替换以下文本块的每次出现。',
+    INITIALIZING_PULL: "正在初始化拉取",
+    FINISHED_PULL: "拉取完成",
+    INITIALIZING_PUSH: "正在初始化推送",
+    INITIALIZING_CLONE: "正在初始化克隆",
+    INITIALIZING_FETCH: "正在初始化获取",
+    TOO_MANY_FILES: "文件太多，无法列出",
+    NO_NETWORK: "无网络连接可用",
+    VAULT_ROOT: "Vault 根目录",
+} as const;
+
+// 设置相关
+export const SETTINGS_MISC = {
+    COPY_DEBUG_INFO: "复制调试信息",
+} as const;
+
+// 差异视图
+export const DIFF_VIEW = {
+    STAGE_HUNK: "暂存代码块",
+    UNSTAGE_HUNK: "取消暂存代码块",
+    RESET_HUNK: "重置代码块",
 } as const;

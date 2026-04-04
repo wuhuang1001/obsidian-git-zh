@@ -1,6 +1,7 @@
 import type ObsidianGit from "src/main";
 import type { Hunk } from "./hunks";
 import { MarkdownView, TFile } from "obsidian";
+import { STATUS_BAR } from "src/lang/zh-CN";
 
 export class ChangesStatusBar {
     constructor(
@@ -12,7 +13,7 @@ export class ChangesStatusBar {
             statusBarEl.addClass("git-changes-status-bar-colored");
         }
 
-        statusBarEl.setAttr("aria-label", "Git diff of the current editor");
+        statusBarEl.setAttr("aria-label", STATUS_BAR.GIT_DIFF_CURRENT_EDITOR);
         this.statusBarEl.setAttribute("data-tooltip-position", "top");
         plugin.app.workspace.on("active-leaf-change", (leaf) => {
             if (

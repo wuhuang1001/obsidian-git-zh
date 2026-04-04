@@ -1,6 +1,7 @@
 import { setIcon, moment } from "obsidian";
 import type ObsidianGit from "./main";
 import { CurrentGitAction } from "./types";
+import { STATUS_BAR } from "./lang/zh-CN";
 
 interface StatusBarMessage {
     message: string;
@@ -156,8 +157,8 @@ export class StatusBar {
             }
         } else {
             this.statusBarEl.ariaLabel = offlineMode
-                ? "Git is offline"
-                : "Git is ready";
+                ? STATUS_BAR.GIT_OFFLINE
+                : STATUS_BAR.GIT_READY;
         }
 
         if (offlineMode) {

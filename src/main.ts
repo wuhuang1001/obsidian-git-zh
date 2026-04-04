@@ -18,7 +18,7 @@ import { PromiseQueue } from "src/promiseQueue";
 import { ObsidianGitSettingsTab } from "src/setting/settings";
 import { StatusBar } from "src/statusBar";
 import { CustomMessageModal } from "src/ui/modals/customMessageModal";
-import { NOTICES, NOTICES_EXTRA, PLACEHOLDERS, MODALS } from "./lang/zh-CN";
+import { NOTICES, NOTICES_EXTRA, PLACEHOLDERS, MODALS, SIDEBAR, GIT_MESSAGES, CONTEXT_MENU } from "./lang/zh-CN";
 import AutomaticsManager from "./automaticsManager";
 import { addCommmands } from "./commands";
 import {
@@ -291,7 +291,7 @@ export default class ObsidianGit extends Plugin {
         });
         this.addRibbonIcon(
             "git-pull-request",
-            "Open Git source control",
+            SIDEBAR.OPEN_GIT_SOURCE_CONTROL,
             async () => {
                 const leafs = this.app.workspace.getLeavesOfType(
                     SOURCE_CONTROL_VIEW_CONFIG.type
@@ -312,7 +312,7 @@ export default class ObsidianGit extends Plugin {
         );
 
         this.registerHoverLinkSource(SOURCE_CONTROL_VIEW_CONFIG.type, {
-            display: "Git View",
+            display: SIDEBAR.GIT_VIEW,
             defaultMod: true,
         });
 
@@ -449,7 +449,7 @@ export default class ObsidianGit extends Plugin {
                 gitManager instanceof FileSystemAdapter
             ) {
                 menu.addItem((item) => {
-                    item.setTitle("Open in default app")
+                    item.setTitle(CONTEXT_MENU.OPEN_IN_DEFAULT_APP)
                         .setIcon("arrow-up-right")
                         .setSection("action")
                         .onClick((_) => {
@@ -457,7 +457,7 @@ export default class ObsidianGit extends Plugin {
                         });
                 });
                 menu.addItem((item) => {
-                    item.setTitle("Show in system explorer")
+                    item.setTitle(CONTEXT_MENU.SHOW_IN_SYSTEM_EXPLORER)
                         .setIcon("arrow-up-right")
                         .setSection("action")
                         .onClick((_) => {
@@ -651,7 +651,7 @@ export default class ObsidianGit extends Plugin {
         });
         const url = await modal.openAndGetResult();
         if (url) {
-            const confirmOption = "Vault Root";
+            const confirmOption = GIT_MESSAGES.VAULT_ROOT;
             let dir = await new GeneralModal(this, {
                 options:
                     this.gitManager instanceof IsomorphicGit
@@ -828,7 +828,7 @@ export default class ObsidianGit extends Plugin {
             ) {
                 await this.push();
             } else {
-                this.displayMessage("No commits to push");
+                this.displayMessage(GIT_MESSAGES.NO_COMMITS_TO_PUSH);
             }
         }
         this.setPluginState({ gitAction: CurrentGitAction.idle });
@@ -1036,7 +1036,7 @@ export default class ObsidianGit extends Plugin {
                     }`
                 );
             } else {
-                this.displayMessage("No changes to commit");
+                this.displayMessage(GIT_MESSAGES.NO_CHANGES_TO_COMMIT);
             }
             this.app.workspace.trigger("obsidian-git:refresh");
 
@@ -1401,14 +1401,14 @@ export default class ObsidianGit extends Plugin {
                     }
                 }),
                 `
-# Additional Instructions
-I strongly recommend to use "Source mode" for viewing the conflicted files. For simple conflicts, in each file listed above replace every occurrence of the following text blocks with the desired text.
+# 附加说明
+${GIT_MESSAGES.CONFLICT_RECOMMENDATION}
 
 \`\`\`diff
 <<<<<<< HEAD
-    File changes in local repository
+    本地仓库中的文件更改
 =======
-    File changes in remote repository
+    远程仓库中的文件更改
 >>>>>>> origin/main
 \`\`\``,
             ];

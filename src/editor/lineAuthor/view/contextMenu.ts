@@ -5,6 +5,7 @@ import { findGutterElementUnderMouse } from "src/editor/lineAuthor/view/gutter/g
 import { pluginRef } from "src/pluginGlobalRef";
 import type { BlameCommit } from "src/types";
 import { impossibleBranch } from "src/utils";
+import { CONTEXT_MENU } from "src/lang/zh-CN";
 
 type ContextMenuConfigurableSettingsKeys =
     | "showCommitHash"
@@ -43,7 +44,7 @@ export function handleContextMenu(
 function addCopyHashMenuItem(commit: CtxMenuCommitInfo, menu: Menu) {
     menu.addItem((item) =>
         item
-            .setTitle("Copy commit hash")
+            .setTitle(CONTEXT_MENU.COPY_COMMIT_HASH)
             .setIcon("copy")
             .setSection("obs-git-line-author-copy")
             .onClick((_e) => navigator.clipboard.writeText(commit.hash))
@@ -67,7 +68,7 @@ function addConfigurableLineAuthorSettings(
     const defaultValue = DEFAULT_SETTINGS.lineAuthor[key];
 
     if (key === "showCommitHash") {
-        title = "Show commit hash";
+        title = CONTEXT_MENU.SHOW_COMMIT_HASH;
         actionNewValue = <LineAuthorSettings["showCommitHash"]>currentValue;
     } else if (key === "authorDisplay") {
         const showOption = settings.lastShownAuthorDisplay ?? defaultValue;

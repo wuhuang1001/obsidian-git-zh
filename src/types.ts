@@ -1,4 +1,5 @@
 import type { LineAuthorSettings } from "src/editor/lineAuthor/model";
+import { GIT_MESSAGES } from "./lang/zh-CN";
 
 export interface ObsidianGitSettings {
     commitMessage: string;
@@ -325,7 +326,7 @@ export enum FileType {
 
 export class NoNetworkError extends Error {
     constructor(public readonly originalError: string) {
-        super("No network connection available");
+        super(GIT_MESSAGES.NO_NETWORK);
     }
 }
 

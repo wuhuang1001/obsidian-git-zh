@@ -15,7 +15,7 @@ import {
 import { IsomorphicGit } from "src/gitManager/isomorphicGit";
 import { SimpleGit } from "src/gitManager/simpleGit";
 import { previewColor } from "src/editor/lineAuthor/lineAuthorProvider";
-import { SETTINGS } from "src/lang/zh-CN";
+import { SETTINGS, SETTINGS_MISC } from "src/lang/zh-CN";
 import type {
     LineAuthorDateTimeFormatOptions,
     LineAuthorDisplay,
@@ -978,7 +978,7 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
         debugDiv.setAttr("style", "margin: var(--size-4-2)");
 
         const debugButton = debugDiv.createEl("button");
-        debugButton.setText("Copy Debug Information");
+        debugButton.setText(SETTINGS_MISC.COPY_DEBUG_INFO);
         debugButton.onclick = async () => {
             await window.navigator.clipboard.writeText(
                 JSON.stringify(

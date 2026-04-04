@@ -4,6 +4,7 @@ import { SPLIT_DIFF_VIEW_CONFIG } from "src/constants";
 import { SimpleGit } from "src/gitManager/simpleGit";
 import type ObsidianGit from "src/main";
 import type { DiffViewState } from "src/types";
+import { DIFF_VIEW } from "src/lang/zh-CN";
 
 import { history, indentWithTab, standardKeymap } from "@codemirror/commands";
 import { getChunks, MergeView } from "@codemirror/merge";
@@ -282,7 +283,7 @@ export default class SplitDiffView extends ItemView {
         stageButton.addClass("clickable-icon");
         stageButton.setAttr(
             "aria-label",
-            this.state.bRef == undefined ? "Stage hunk" : "Unstage hunk"
+            this.state.bRef == undefined ? DIFF_VIEW.STAGE_HUNK : DIFF_VIEW.UNSTAGE_HUNK
         );
         setIcon(stageButton, this.state.bRef == undefined ? "plus" : "minus");
 
@@ -320,7 +321,7 @@ export default class SplitDiffView extends ItemView {
         if (this.state.bRef == undefined) {
             const resetButton = contentEl.createDiv();
             resetButton.addClass("clickable-icon");
-            resetButton.setAttr("aria-label", "Reset hunk");
+            resetButton.setAttr("aria-label", DIFF_VIEW.RESET_HUNK);
             setIcon(resetButton, "undo");
             resetButton.onmousedown = (_) => {
                 const source = this.mergeView!.a;

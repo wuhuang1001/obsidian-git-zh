@@ -10,6 +10,7 @@ import type {
     TreeItem,
     UnstagedFile,
 } from "../types";
+import { GIT_MESSAGES } from "../lang/zh-CN";
 
 export abstract class GitManager {
     readonly plugin: ObsidianGit;
@@ -304,7 +305,7 @@ export abstract class GitManager {
 
                 files = chunks.join(", ");
             } else {
-                files = "Too many files to list";
+                files = GIT_MESSAGES.TOO_MANY_FILES;
             }
 
             template = template.replace("{{files}}", files);
@@ -321,9 +322,9 @@ export abstract class GitManager {
             if (status2.staged.length < 100) {
                 files = status2.staged.map((e) => e.path).join("\n");
             } else {
-                files = "Too many files to list";
+                files = GIT_MESSAGES.TOO_MANY_FILES;
             }
-            template = template + "\n\n" + "Affected files:" + "\n" + files;
+            template = template + "\n\n" + "受影响的文件:" + "\n" + files;
         }
         return template;
     }
