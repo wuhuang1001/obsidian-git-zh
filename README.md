@@ -130,7 +130,7 @@
 
 ## 🔄 与上游同步
 
-本仓库每天自动同步上游 [Vinzent03/obsidian-git](https://github.com/Vinzent03/obsidian-git) 的更新。
+~~本仓库每天自动同步上游 [Vinzent03/obsidian-git](https://github.com/Vinzent03/obsidian-git) 的更新。~~
 
 ## 🙋 联系与致谢
 
